@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Часто задаваемые вопросы</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: white;
+            color: black;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        button {
+            display: block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            background-color: lightblue;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: deepskyblue;
+        }
+        .back-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .back-button:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <h2>Часто задаваемые вопросы:</h2>
+    <button onclick="window.location.href='answer.html'">Как правильно сортировать отходы?</button>
+    <button onclick="window.location.href='answer_frequency.html'">Как часто нужно сдавать отходы на переработку?</button>
+    <button onclick="window.location.href='answer_environment.html'">Влияние переработки на экологию?</button>
+    <button onclick="window.location.href='answer_advantages.html'">Какие преимущества есть у переработки?</button>
+    <button onclick="window.location.href='answer_earnings.html'">Можно ли заработать на сдаче отходов?</button>
+    <button onclick="window.location.href='answer_recyclable.html'">Какие отходы перерабатываются, а какие нет?</button>
+    
+    <button class="back-button" onclick="window.location.href='index.html'">На главную</button>
+
+    <script>
+        function showAnswer(question) {
+            alert(question); // Здесь можно добавить логику для отображения ответа на вопрос
+        }
+    </script>
+</body>
+</html> 
