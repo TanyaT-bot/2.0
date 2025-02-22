@@ -5,17 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Переработка отходов</title>
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=5b7fd6ad-b698-4113-8a0b-605a123864ac" type="text/javascript"></script>
+    <script src="googleSheets.js"></script>
     <script>
         let map;
         let userLocation;
-
-        function init() {
-            // Инициализация карты
-            map = new ymaps.Map('map', {
-                center: [59.9343, 30.3351], // Координаты центра карты
-                zoom: 12
-            });
-        }
 
         function showWasteCategories() {
             const categories = ['Пластик', 'Стекло', 'Бумага', 'Батарейки', 'Одежда', 'Электроника'];
@@ -39,30 +32,25 @@
 
         function requestGeolocation() {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((position) => {
-                    userLocation = [position.coords.latitude, position.coords.longitude];
-                    console.log("Ваше местоположение:", userLocation);
-                    map.setCenter(userLocation, 14); // Устанавливаем центр карты на местоположение пользователя
+                navigator.geolocation.getCurrentPosition(
+                    function (position){
+                        window.userLocation = [position.coords.latitude, position.coords.longitude];
+                        console.log('Геолокация успешно получена', window.userLocation); 
 
-                    // Добавление маркера для пользователя
-                    const userMarker = new ymaps.Placemark(userLocation, { balloonContent: 'Вы здесь' });
-                    map.geoObjects.add(userMarker); // Добавляем маркер на карту
-
-                    // После получения местоположения ищем ближайшие пункты
-                    findNearestPoints(userLocation);
-                }, (error) => {
-                    console.error("Ошибка получения геолокации:", error);
-                });
+                        if (window.map) {
+                            window.map.setCenter(window.userLocation, 14);
+                            const userMarker = new ymaps.Placemark(window.userLocation, { balloonContent: 'Вы здесь'});
+                            window.map.geoObjects.add(userMarker);
+                        }
+                    },
+                    function(error) {
+                        console.error('Ошибка геолокации', error);
+                        alert('Ошибка при получении геолокации.');
+                    }
+                );
             } else {
-                console.log("Геолокация не поддерживается этим браузером.");
+                alert('Ваш браузер не поддерживает геолокацию.');
             }
-        }
-
-        function findNearestPoints(userLocation) {
-            // Логика для поиска ближайших пунктов переработки по категории
-            console.log(`Поиск пунктов переработки для местоположения: ${userLocation}`);
-            // Здесь можно добавить код для получения данных с сервера
-            initMap(); // Инициализируем карту с пунктами переработки
         }
 
         async function initMap() {
@@ -80,7 +68,7 @@
                 });
                 map.geoObjects.add(placemark);
             });
-        }
+        } 
 
         function showRecommendations() {
             const recommendations = `
@@ -160,17 +148,6 @@
             recommendationsContainer.style.display = 'block'; // Показываем контейнер с рекомендациями
         }
 
-        function buildRoute(point) {
-            // Логика для построения маршрута
-            const route = new ymaps.Polyline([userLocation, point.coords], {}, {
-                strokeColor: "#0000FF",
-                strokeWidth: 4
-            });
-            map.geoObjects.add(route);
-            // Открытие Яндекс.Карт с маршрутом
-            window.open(`https://yandex.ru/maps/?rtext=${userLocation[0]},${userLocation[1]}~${point.coords[0]},${point.coords[1]}`);
-        }
-
         function showFAQ() {
             const faqContainer = document.getElementById('faq');
             faqContainer.innerHTML = `
@@ -189,7 +166,6 @@
             alert(question); // Здесь можно добавить логику для отображения ответа на вопрос
         }
 
-        ymaps.ready(init);
     </script>
     <style>
         /* Минималистичный стиль */
@@ -289,6 +265,22 @@
             border-radius: 5px;
             background-color: #f9f9f9;
         }
+        #routeButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: orange;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center; /* Центрируем текст */
+            width: 200px; 
+        }
+
+        #routeButton:hoverv{
+            background-color: darkorange;
+        }
     </style>
 </head>
 <body>
@@ -306,7 +298,7 @@
         <div id="categoryList"></div> <!-- Список категорий -->
         <button id="findNearestButton" onclick="requestGeolocation()">Найти ближайший пункт переработки</button>
     </div>
-    <div id="map" style="width: 100%; height: 500px;""></div> <!-- Контейнер для карты -->
+    <div id="map" style="width: 100%; height: 400px;"></div> <!-- Контейнер для карты -->
     <button id="homeButton" onclick="window.location.href='index.html'">На главную</button> <!-- Кнопка для возврата на главную страницу -->
     <div id="recommendations"></div> <!-- Контейнер для рекомендаций -->
     <div id="faq"></div> <!-- Контейнер для FAQ -->
