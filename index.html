@@ -141,13 +141,11 @@
                     <li>📍 Старайся сокращать количество отходов — выбирай многоразовые вещи.</li>
                 </ul>
             `;
-
             // Отображение рекомендаций
             const recommendationsContainer = document.getElementById('recommendations');
             recommendationsContainer.innerHTML = recommendations;
             recommendationsContainer.style.display = 'block'; // Показываем контейнер с рекомендациями
         }
-
         function showFAQ() {
             const faqContainer = document.getElementById('faq');
             faqContainer.innerHTML = `
@@ -166,7 +164,38 @@
             alert(question); // Здесь можно добавить логику для отображения ответа на вопрос
         }
 
-    </script>
+        function showResources() {
+            console.log('Функция showResources вызвана!');
+
+            //получаем контейнер для полезной информации 
+            var container = document.getElementById('resourcesContainer');
+            if (!container) {
+                console.error('Элемент #resourcesContainer не найден!');
+                return;
+            }
+
+            //если контейнер скрыт, наполняем его контентом и показываем, иначе скрываем
+            if (container.style.display === 'none' || container.style.display === '') {
+                container.innerHTML = `
+                <h2>Полезное о переработке отходов</h2>
+                <p>Здесь вы найдете ресурсы и советы, как правильно перерабатывать отходы:</p>
+                <ul>
+                    <li><a href="https://recyclingprom.ru/info/utilizatsiya-i-pererabotka-plastikovyh-othodov/" target="_blank">Как перерабатывать пластик </a></li>
+                    <li><a href="https://www.vavilon.spb.ru/kak-sortirovat-musor/" target="_blank">Сортирока бытовых отходов </a></li>
+                    <li><a href="https://utilexpert.ru/blog/pererabotka-othodov/" target="_blank">Экологичные способы переработки </a></li>
+                </ul>
+            `;
+            container.style.display = 'block';
+        } else {
+            container.style.display = 'none';
+            container.innerHTML = ''; //очищаем содержимое, если скрываем 
+        }
+    }
+
+    //
+    window.showResources = showResources;
+    
+</script>
     <style>
         /* Минималистичный стиль */
         body {
@@ -300,6 +329,9 @@
     </div>
     <div id="map" style="width: 100%; height: 400px;"></div> <!-- Контейнер для карты -->
     <button id="homeButton" onclick="window.location.href='index.html'">На главную</button> <!-- Кнопка для возврата на главную страницу -->
+
+    <div id="resourcesContainer" style="display: none;"></div> <!-- Контейнер для полезной информации -->
+
     <div id="recommendations"></div> <!-- Контейнер для рекомендаций -->
     <div id="faq"></div> <!-- Контейнер для FAQ -->
     <footer>
