@@ -11,7 +11,7 @@
         let userLocation;
 
         // Определение функции showResources
-        function showResources() {
+        window.showResources = function () {
             // Получаем контейнер для полезной информации 
             var container = document.getElementById('resourcesContainer');
 
@@ -54,7 +54,7 @@
         <button onclick="showWasteCategories()">Найти пункт переработки</button>
         <button onclick="window.location.href='recommendations.html'">Рекомендации по подготовке отходов</button>
         <button onclick="window.location.href='faq.html'">FAQ</button>
-        <button onclick="showResources()">Полезное о переработке отходов</button>
+        <button onclick="window.location.href='resources.html'">Полезное о переработке отходов</button>
         <button onclick="showFeedback()">Обратная связь</button>
     </div>
     <div id="resourcesContainer" style="display: none;"></div> <!-- Контейнер для полезной информации -->
