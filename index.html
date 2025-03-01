@@ -188,13 +188,12 @@
             container.style.display = 'block';
         } else {
             container.style.display = 'none';
-            container.innerHTML = ''; //очищаем содержимое, если скрываем 
         }
     }
 
     //
     window.showResources = showResources;
-    
+
 </script>
     <style>
         /* Минималистичный стиль */
@@ -319,7 +318,7 @@
         <button onclick="showWasteCategories()">Найти пункт переработки</button>
         <button onclick="window.location.href='recommendations.html'">Рекомендации по подготовке отходов</button>
         <button onclick="window.location.href='faq.html'">FAQ</button>
-        <button onclick="showResources()">Полезное о переработке отходов</button>
+        <button onclick="window.open('resources.html', '_blank')">Полезное о переработке отходов</button>
         <button onclick="showFeedback()">Обратная связь</button>
     </div>
     <div id="categoryContainer">
