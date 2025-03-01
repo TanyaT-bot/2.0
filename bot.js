@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 const { getDataFromSheet } = require('./googleSheets'); // Импорт функции для получения данных из Google Sheets
 
 // Создаем бота с токеном
-const token = 'YOUR_TELEGRAM_BOT_TOKEN';
+const token = '7658669481:AAG5P-JpglzmOZVw2nYIoYfutaruyUG1IYQ';
 const bot = new TelegramBot(token, { polling: true });
 
 // Обработка команды /start
@@ -48,7 +48,7 @@ bot.onText(/Пункты переработки/, async (msg) => {
 
 bot.onText(/Открыть WebApp/, (msg) => {
     const chatId = msg.chat.id;
-    const webAppUrl = 'https://your-webapp-url.com'; // URL вашего WebApp
+    const webAppUrl = 'https://tanyat-bot.github.io/2.0/'; // URL вашего WebApp
     bot.sendMessage(chatId, 'Открыть WebApp', {
         reply_markup: {
             inline_keyboard: [[
@@ -61,5 +61,5 @@ bot.onText(/Открыть WebApp/, (msg) => {
 // Запуск сервера
 const app = express();
 app.listen(3000, () => {
-    console.log('Сервер запущен на http://localhost:3000');
+    console.log('Сервер запущен на http://localhost:5001/index.html');
 }); 
