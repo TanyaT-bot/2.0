@@ -38,7 +38,6 @@
                         console.log('Геолокация успешно получена', window.userLocation); 
 
                         if (window.map) {
-                            window.map.setCenter(window.userLocation, 14);
                             const userMarker = new ymaps.Placemark(window.userLocation, { balloonContent: 'Вы здесь'});
                             window.map.geoObjects.add(userMarker);
                         }
