@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Переработка отходов</title>
-    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=5b7fd6ad-b698-4113-8a0b-605a123864ac" type="text/javascript"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=ВАШ_API_КЛЮЧ" type="text/javascript"></script>
     <script src="googleSheets.js"></script>
     <script>
         let map;
@@ -33,13 +33,13 @@
         function requestGeolocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
-                    function (position){
+                    function (position) {
                         window.userLocation = [position.coords.latitude, position.coords.longitude];
                         console.log('Геолокация успешно получена', window.userLocation); 
 
                         if (window.map) {
                             window.map.setCenter(window.userLocation, 14);
-                            const userMarker = new ymaps.Placemark(window.userLocation, { balloonContent: 'Вы здесь'});
+                            const userMarker = new ymaps.Placemark(window.userLocation, { balloonContent: 'Вы здесь' });
                             window.map.geoObjects.add(userMarker);
                         }
                     },
@@ -165,36 +165,25 @@
         }
 
         function showResources() {
-            console.log('Функция showResources вызвана!');
-
-            //получаем контейнер для полезной информации 
-            var container = document.getElementById('resourcesContainer');
-            if (!container) {
-                console.error('Элемент #resourcesContainer не найден!');
-                return;
-            }
-
-            //если контейнер скрыт, наполняем его контентом и показываем, иначе скрываем
+            const container = document.getElementById('resourcesContainer');
             if (container.style.display === 'none' || container.style.display === '') {
                 container.innerHTML = `
                 <h2>Полезное о переработке отходов</h2>
                 <p>Здесь вы найдете ресурсы и советы, как правильно перерабатывать отходы:</p>
                 <ul>
-                    <li><a href="https://recyclingprom.ru/info/utilizatsiya-i-pererabotka-plastikovyh-othodov/" target="_blank">Как перерабатывать пластик </a></li>
-                    <li><a href="https://www.vavilon.spb.ru/kak-sortirovat-musor/" target="_blank">Сортирока бытовых отходов </a></li>
-                    <li><a href="https://utilexpert.ru/blog/pererabotka-othodov/" target="_blank">Экологичные способы переработки </a></li>
+                    <li><a href="https://recyclingprom.ru/info/utilizatsiya-i-pererabotka-plastikovyh-othodov/" target="_blank">Как перерабатывать пластик</a></li>
+                    <li><a href="https://www.vavilon.spb.ru/kak-sortirovat-musor/" target="_blank">Сортировка бытовых отходов</a></li>
+                    <li><a href="https://utilexpert.ru/blog/pererabotka-othodov/" target="_blank">Экологичные способы переработки</a></li>
                 </ul>
-            `;
-            container.style.display = 'block';
-        } else {
-            container.style.display = 'none';
+                `;
+                container.style.display = 'block';
+            } else {
+                container.style.display = 'none';
+            }
         }
-    }
 
-    //
-    window.showResources = showResources;
-
-</script>
+        // Остальные функции...
+    </script>
     <style>
         /* Минималистичный стиль */
         body {
@@ -318,8 +307,8 @@
         <button onclick="showWasteCategories()">Найти пункт переработки</button>
         <button onclick="window.location.href='recommendations.html'">Рекомендации по подготовке отходов</button>
         <button onclick="window.location.href='faq.html'">FAQ</button>
-        <button onclick="window.location.href='resources.html'">Полезное о переработке отходов</button> 
-        <button onclick="window.open('https://forms.gle/Uhhgr1JUfqVXGe8d8', '_blank')">Обратная связь</button>
+        <button onclick="window.location.href='resources.html'">Полезное о переработке отходов</button>
+        <button onclick="showFeedback()">Обратная связь</button>
     </div>
     <div id="categoryContainer">
         <h2>Выберите категорию отходов:</h2>
