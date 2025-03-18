@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Запуск сервера на порту 5001
-app.listen(5001, () => {
-    console.log('Сервер запущен на http://localhost:5001');
+// Запуск сервера на порту 5002
+app.listen(5002, () => {
+    console.log('Сервер запущен на http://localhost:5002');
 }); 
